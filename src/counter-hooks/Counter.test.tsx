@@ -11,13 +11,25 @@ describe("Counter component", () => {
     expect(result.current.count).toBe(3);
   });
 
-  it("increment correctly", () => {
+  it("increments correctly", () => {
     const { result } = renderHook(() => useCounter(2));
 
     act(() => {
       result.current.increment();
     });
     expect(result.current.count).toBe(3);
+  });
+
+  it("decrements correctly", () => {
+    const { result } = renderHook(() => useCounter(4));
+
+    act(() => {
+      result.current.decrement();
+    });
+    act(() => {
+      result.current.decrement();
+    });
+    expect(result.current.count).toBe(2);
   });
 
   afterEach(() => {
