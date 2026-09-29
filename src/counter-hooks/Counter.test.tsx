@@ -32,6 +32,18 @@ describe("Counter component", () => {
     expect(result.current.count).toBe(2);
   });
 
+  it("does not go below zero", () => {
+    const { result } = renderHook(() => useCounter(1));
+
+    act(() => {
+      result.current.decrement();
+    });
+    act(() => {
+      result.current.decrement();
+    });
+    expect(result.current.count).toBe(0);
+  });
+
   afterEach(() => {
     cleanup();
   });
