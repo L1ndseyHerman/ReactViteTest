@@ -55,6 +55,18 @@ describe("Counter component", () => {
     expect(decrementButton).toBeDisabled();
   });
 
+  it("does not increment above max count", () => {
+    render(<Counter initialCount={8} maxCount={10} />);
+    const countElement = screen.getByTestId("count-value");
+
+    const incrementButton = screen.getByText("Increment");
+    fireEvent.click(incrementButton);
+    fireEvent.click(incrementButton);
+    fireEvent.click(incrementButton);
+    expect(countElement).toHaveTextContent("Count: 10");
+    expect(incrementButton).toBeDisabled();
+  });
+
   afterEach(() => {
     cleanup();
   });
