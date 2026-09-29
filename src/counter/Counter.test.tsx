@@ -39,6 +39,8 @@ describe("Counter component", () => {
 
     fireEvent.click(decrementButton);
     expect(countElement).toHaveTextContent("Count: 2");
+
+    expect(decrementButton).not.toBeDisabled();
   });
 
   it("shouldn't go below zero when clicking the decrement button", () => {
@@ -50,6 +52,7 @@ describe("Counter component", () => {
     fireEvent.click(decrementButton);
     fireEvent.click(decrementButton);
     expect(countElement).toHaveTextContent("Count: 0");
+    expect(decrementButton).toBeDisabled();
   });
 
   afterEach(() => {
