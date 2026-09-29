@@ -44,6 +44,24 @@ describe("Counter component", () => {
     expect(result.current.count).toBe(0);
   });
 
+  it("does not go above the max value", () => {
+    const { result } = renderHook(() => useCounter(2, 4));
+
+    act(() => {
+      result.current.increment();
+    });
+    act(() => {
+      result.current.increment();
+    });
+    act(() => {
+      result.current.increment();
+    });
+    act(() => {
+      result.current.increment();
+    });
+    expect(result.current.count).toBe(4);
+  });
+
   afterEach(() => {
     cleanup();
   });
