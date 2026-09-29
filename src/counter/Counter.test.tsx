@@ -67,6 +67,21 @@ describe("Counter component", () => {
     expect(incrementButton).toBeDisabled();
   });
 
+  it("reset button resets the count to initial value", () => {
+    render(<Counter initialCount={5} />);
+    const countElement = screen.getByTestId("count-value");
+
+    const incrementButton = screen.getByText("Increment");
+    const resetButton = screen.getByText("Reset");
+    fireEvent.click(incrementButton);
+    fireEvent.click(incrementButton);
+
+    expect(countElement).toHaveTextContent("Count: 7");
+    fireEvent.click(resetButton);
+
+    expect(countElement).toHaveTextContent("Count: 5");
+  });
+
   afterEach(() => {
     cleanup();
   });

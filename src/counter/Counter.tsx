@@ -15,6 +15,7 @@ const Counter = ({ initialCount = 0, maxCount = 10 }) => {
       >
         Decrement
       </button>
+      <button onClick={() => setCount(initialCount)}>Reset</button>
     </div>
   );
 };
