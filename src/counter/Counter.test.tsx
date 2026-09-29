@@ -24,21 +24,32 @@ describe("Counter component", () => {
   });
 
   it("decrements count when clicking decrement button", () => {
-    render(<Counter initialCount={2} />);
+    render(<Counter initialCount={6} />);
     const countElement = screen.getByTestId("count-value");
 
     const decrementButton = screen.getByText("Decrement");
     fireEvent.click(decrementButton);
-    expect(countElement).toHaveTextContent("Count: 1");
+    expect(countElement).toHaveTextContent("Count: 5");
 
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: 4");
+
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: 3");
+
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: 2");
+  });
+
+  it("shouldn't go below zero when clicking the decrement button", () => {
+    render(<Counter initialCount={1} />);
+    const countElement = screen.getByTestId("count-value");
+
+    const decrementButton = screen.getByText("Decrement");
+    fireEvent.click(decrementButton);
+    fireEvent.click(decrementButton);
     fireEvent.click(decrementButton);
     expect(countElement).toHaveTextContent("Count: 0");
-
-    fireEvent.click(decrementButton);
-    expect(countElement).toHaveTextContent("Count: -1");
-
-    fireEvent.click(decrementButton);
-    expect(countElement).toHaveTextContent("Count: -2");
   });
 
   afterEach(() => {
