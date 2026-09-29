@@ -23,10 +23,25 @@ describe("Counter component", () => {
     expect(countElement).toHaveTextContent("Count: 2");
   });
 
+  it("decrements count when clicking decrement button", () => {
+    render(<Counter initialCount={2} />);
+    const countElement = screen.getByTestId("count-value");
+
+    const decrementButton = screen.getByText("Decrement");
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: 1");
+
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: 0");
+
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: -1");
+
+    fireEvent.click(decrementButton);
+    expect(countElement).toHaveTextContent("Count: -2");
+  });
+
   afterEach(() => {
     cleanup();
   });
 });
-
-//  Has a state
-//  Displays current count
