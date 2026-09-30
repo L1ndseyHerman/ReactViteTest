@@ -18,10 +18,12 @@ const User = ({ id }: { id: number }) => {
     return <p>loading...</p>;
   }
 
-  <>
-    <h2>{user.name}</h2>
-    <p>{user.email}</p>
-  </>;
+  return (
+    <>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </>
+  );
 };
 
 export default User;
