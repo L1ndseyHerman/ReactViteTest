@@ -29,6 +29,23 @@ describe("User component", () => {
     });
   });
 
+  it("handles API error correctly", async () => {
+    globalThis.fetch = vi.fn(() => {
+      return Promise.resolve({
+        ok: false,
+      } as Response);
+    });
+
+    render(<Post id={999} />);
+
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalled();
+      expect(screen.getByText(/Error:/i)).toBeInTheDocument();
+    });
+  });
+
   afterEach(() => {
     vi.resetAllMocks();
   });
