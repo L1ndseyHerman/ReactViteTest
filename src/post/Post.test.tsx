@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Post from "./Post";
 import "@testing-library/jest-dom/vitest";
@@ -8,7 +8,7 @@ describe("User component", () => {
     globalThis.fetch = vi.fn();
   });
 
-  it("renders the post data correctly", () => {
+  it("renders the post data correctly", async () => {
     globalThis.fetch = vi.fn(() => {
       return Promise.resolve({
         ok: true,
@@ -22,6 +22,11 @@ describe("User component", () => {
     render(<Post id={9} />);
 
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalled();
+      expect(screen.getByText("Title: My post")).toBeInTheDocument();
+    });
   });
 
   afterEach(() => {
