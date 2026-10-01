@@ -1,8 +1,8 @@
 import "./App.css";
-import TodoList from "./todo/TodoList";
+import MovieApp from "./movie/MovieApp";
 
 function App() {
-  return <TodoList />;
+  return <MovieApp />;
 }
 
 export default App;
