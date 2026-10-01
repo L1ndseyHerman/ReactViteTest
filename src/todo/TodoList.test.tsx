@@ -25,4 +25,25 @@ describe("TodoList integration test", () => {
 
     expect(screen.getByText("Buy Pizza!")).toBeInTheDocument();
   });
+
+  it("deletes a todo when delete button is clicked", () => {
+    render(<TodoList />);
+
+    const inputBox = screen.getByPlaceholderText("Enter a todo");
+    const addButton = screen.getByText("Add todo");
+
+    fireEvent.change(inputBox, { target: { value: "Buy Pizza!" } });
+    fireEvent.click(addButton);
+
+    fireEvent.change(inputBox, { target: { value: "Buy Milk" } });
+    fireEvent.click(addButton);
+
+    const deleteButtons = screen.getAllByText("Delete");
+    expect(deleteButtons).toHaveLength(2);
+
+    fireEvent.click(deleteButtons[0]);
+
+    expect(screen.queryByText("Buy Pizza!")).toBe(null);
+    expect(screen.getByText("Buy Milk")).toBeInTheDocument();
+  });
 });
