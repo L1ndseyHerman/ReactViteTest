@@ -7,7 +7,7 @@ type TodoItemProp = {
 
 const TodoItem = ({ todo, onDelete }: TodoItemProp) => {
   return (
-    <div>
+    <div data-testid="todo-item">
       <span>{todo.text}</span>
       <button onClick={() => onDelete(todo.id)}>Delete</button>
     </div>
