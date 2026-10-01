@@ -1,8 +1,8 @@
 import "./App.css";
-import Counter from "./counter/Counter";
+import TodoList from "./todo/TodoList";
 
 function App() {
-  return <Counter initialCount={5}></Counter>;
+  return <TodoList />;
 }
 
 export default App;
