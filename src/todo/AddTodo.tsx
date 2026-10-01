@@ -10,8 +10,7 @@ const AddTodo = ({ onAdd }: AddTodoProps) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     //  Stops the page from reloading, need this in vanilla JS, don't React.
     e.preventDefault();
-    //  This wasn't working until I checked for the empty string:
-    if (text === "" || !text.trim) {
+    if (!text.trim()) {
       return;
     }
 
