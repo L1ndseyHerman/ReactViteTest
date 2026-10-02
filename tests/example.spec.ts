@@ -20,4 +20,12 @@ test.describe("App", () => {
     await page.click("text=Add Movie");
     await expect(page.getByText("Pulp fiction")).toBeVisible();
   });
+
+  test("It adds a new movie using Enter key", async ({ page }) => {
+    const input = page.getByPlaceholder("Enter movie name");
+    await input.fill("Saving Private Ryan");
+    await input.press("Enter");
+
+    await expect(page.getByText("Saving Private Ryan")).toBeVisible();
+  });
 });
