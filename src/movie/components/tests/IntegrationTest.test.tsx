@@ -12,4 +12,16 @@ describe("Movie App integration tests", () => {
 
     expect(screen.queryAllByRole("listitem")).toHaveLength(0);
   });
+
+  it("adds a new movie when form is submitted", () => {
+    render(<App />);
+
+    const inputBox = screen.getByPlaceholderText("Enter movie name");
+    const addButton = screen.getByText("Add Movie");
+
+    fireEvent.change(inputBox, { target: { value: "Pulp fiction" } });
+    fireEvent.click(addButton);
+
+    expect(screen.getByText("Pulp fiction")).toBeInTheDocument();
+  });
 });
