@@ -1,15 +1,18 @@
+import { useDispatch } from "react-redux";
+import { deleteMovie } from "../redux/actions";
+
 type Props = {
   title: string;
   index: number;
 };
 
 const MovieItem = ({ title, index }: Props) => {
-  console.log(index);
+  const dispatch = useDispatch();
 
   return (
     <li>
       {title}
-      <button onClick={() => {}}>Delete</button>
+      <button onClick={() => dispatch(deleteMovie(index))}>Delete</button>
     </li>
   );
 };
