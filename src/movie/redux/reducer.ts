@@ -13,6 +13,9 @@ const movieReducer = (
     case "DELETE_MOVIE":
       return state.filter((_, index) => index !== action.payload);
 
+    case "RESET":
+      return initialState;
+
     default:
       return state;
   }
