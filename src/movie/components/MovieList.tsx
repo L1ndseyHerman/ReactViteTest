@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import MovieItem from "./MovieItem";
+import { selectMovies } from "../redux/selectors";
 
 const MovieList = () => {
-  const movies = ["Interstellar", "Fight club"];
+  const movies = useSelector(selectMovies);
 
   return (
     <ul>
