@@ -28,4 +28,16 @@ test.describe("App", () => {
 
     await expect(page.getByText("Saving Private Ryan")).toBeVisible();
   });
+
+  test("deletes a movie", async ({ page }) => {
+    const input = page.getByPlaceholder("Enter movie name");
+    await input.fill("The Shining");
+
+    await page.click("text=Add Movie");
+
+    const deleteButton = page.getByText("Delete").last();
+    await deleteButton.click();
+
+    await expect(page.getByText("The Shining")).not.toBeVisible();
+  });
 });
